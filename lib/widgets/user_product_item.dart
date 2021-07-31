@@ -18,6 +18,7 @@ class UserProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
     return ListTile(
       title: Text(name),
       leading: CircleAvatar(
@@ -47,10 +48,31 @@ class UserProductItem extends StatelessWidget {
                     actions: <Widget>[
                       ElevatedButton(
                         child: Text('Yes'),
-                        onPressed: () {
+                        onPressed: () async {
                           Navigator.of(context).pop();
-                          Provider.of<Products>(context, listen: false)
-                              .deleteProduct(id);
+                          try {
+                            await Provider.of<Products>(context, listen: false)
+                                .deleteProduct(id)
+                                .then(
+                                  (_) => scaffoldMessenger.showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Removed $name from your products',
+                                      ),
+                                      duration: Duration(seconds: 3),
+                                    ),
+                                  ),
+                                );
+                          } catch (error) {
+                            scaffoldMessenger.showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Couldn\'t remove $name',
+                                ),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
+                          }
                         },
                       ),
                       TextButton(
