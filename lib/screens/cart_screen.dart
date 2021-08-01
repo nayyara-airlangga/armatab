@@ -47,45 +47,7 @@ class CartScreen extends StatelessWidget {
                     ),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
-                  TextButton(
-                    child: Text(
-                      'Order Now',
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                    onPressed: () {
-                      if (cartData.items.length != 0) {
-                        showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: Text('Finalize order?'),
-                                  content: Text(
-                                      'Would you like to finalize this order?'),
-                                  actions: <Widget>[
-                                    ElevatedButton(
-                                      child: Text('Yes'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                        Provider.of<Orders>(context,
-                                                listen: false)
-                                            .addOrder(
-                                          cartProducts:
-                                              cartData.items.values.toList(),
-                                          total: cartData.totalPrice,
-                                        );
-                                        cartData.clearCart();
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text('No'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                ));
-                      }
-                    },
-                  ),
+                  OrderButton(cartData: cartData),
                 ],
               ),
             ),
@@ -108,6 +70,78 @@ class CartScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class OrderButton extends StatefulWidget {
+  const OrderButton({
+    Key key,
+    @required this.cartData,
+  }) : super(key: key);
+
+  final cart.Cart cartData;
+
+  @override
+  _OrderButtonState createState() => _OrderButtonState();
+}
+
+class _OrderButtonState extends State<OrderButton> {
+  bool _isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: _isLoading
+          ? CircularProgressIndicator()
+          : Text(
+              'Order Now',
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+      onPressed: (widget.cartData.totalPrice <= 0 || _isLoading)
+          ? null
+          : () async {
+              if (widget.cartData.items.length != 0) {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: Text('Finalize order?'),
+                          content:
+                              Text('Would you like to finalize this order?'),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              child: Text('Yes'),
+                              onPressed: () async {
+                                setState(() {
+                                  _isLoading = true;
+                                });
+                                Navigator.of(context).pop();
+                                await Provider.of<Orders>(context,
+                                        listen: false)
+                                    .addOrder(
+                                  cartProducts:
+                                      widget.cartData.items.values.toList(),
+                                  total: widget.cartData.totalPrice,
+                                );
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                                widget.cartData.clearCart();
+                              },
+                            ),
+                            TextButton(
+                              child: Text('No'),
+                              onPressed: () {
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ));
+              }
+            },
     );
   }
 }
