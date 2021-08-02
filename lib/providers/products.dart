@@ -80,9 +80,13 @@ class Products with ChangeNotifier {
     );
   }
 
-  Future<void> fetchAndSetProducts() async {
+  Future<void> fetchAndSetProducts({
+    bool filterByUser = false,
+  }) async {
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userID"' : '';
     final url = Uri.parse(
-      'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products.json?auth=$authToken',
+      'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products.json?auth=$authToken&$filterString',
     );
     try {
       final response = await http.get(url);
@@ -132,6 +136,7 @@ class Products with ChangeNotifier {
             'description': product.description,
             'imageURL': product.imageURL,
             'price': product.price,
+            'creatorId': userID,
           },
         ),
       );
