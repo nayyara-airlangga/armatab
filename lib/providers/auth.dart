@@ -82,4 +82,11 @@ class Auth with ChangeNotifier {
       urlSegment: 'signInWithPassword',
     );
   }
+
+  void logout() {
+    _token = null;
+    _userID = null;
+    _expirationDate = null;
+    notifyListeners();
+  }
 }
