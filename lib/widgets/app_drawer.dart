@@ -14,7 +14,7 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
-            title: Text('Pasar Online'),
+            title: Text('ArmaTab'),
             automaticallyImplyLeading: false,
           ),
           Divider(
