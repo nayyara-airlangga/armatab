@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/auth.dart';
 import 'providers/products.dart';
 import 'providers/cart.dart';
 import 'providers/orders.dart';
@@ -10,6 +11,7 @@ import 'screens/cart_screen.dart';
 import 'screens/orders_screen.dart';
 import 'screens/user_products_screen.dart';
 import 'screens/edit_product_screen.dart';
+import 'screens/auth_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,6 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (context) => Auth(),
+        ),
         ChangeNotifierProvider(
           create: (context) => Products(),
         ),
@@ -38,7 +43,7 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.lightBlue,
           fontFamily: 'Lato',
         ),
-        home: ProductsOverviewScreen(),
+        home: AuthScreen(),
         routes: {
           ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
           CartScreen.routeName: (context) => CartScreen(),
