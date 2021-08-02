@@ -57,11 +57,11 @@ class Products with ChangeNotifier {
   final String authToken;
   final String userID;
 
-  Products(
-    this._items, {
+  Products([
+    this._items,
     this.authToken,
     this.userID,
-  });
+  ]);
 
   List<Product> get items {
     // if (_showFavoritesOnly) {
@@ -119,7 +119,7 @@ class Products with ChangeNotifier {
       _items = loadedProducts;
       notifyListeners();
     } catch (error) {
-      throw error;
+      throw (error);
     }
   }
 
