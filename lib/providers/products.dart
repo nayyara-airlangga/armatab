@@ -54,6 +54,15 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
+  final String authToken;
+  final String userID;
+
+  Products(
+    this._items, {
+    this.authToken,
+    this.userID,
+  });
+
   List<Product> get items {
     // if (_showFavoritesOnly) {
     //   return _items.where((product) => product.isFavorite).toList();
@@ -73,7 +82,7 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetProducts() async {
     final url = Uri.parse(
-      'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products.json',
+      'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products.json?auth=$authToken',
     );
     try {
       final response = await http.get(url);
@@ -83,6 +92,11 @@ class Products with ChangeNotifier {
       if (extractedData == null) {
         return;
       }
+      final favoritesUrl = Uri.parse(
+        'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/userFavorites/$userID.json?auth=$authToken',
+      );
+      final favoritesResponse = await http.get(favoritesUrl);
+      final favoritesData = json.decode(favoritesResponse.body);
       extractedData.forEach((productID, productData) {
         loadedProducts.insert(
           0,
@@ -92,7 +106,9 @@ class Products with ChangeNotifier {
             description: productData['description'],
             price: productData['price'],
             imageURL: productData['imageURL'],
-            isFavorite: productData['isFavorite'],
+            isFavorite: favoritesData == null
+                ? false
+                : favoritesData[productID] ?? false,
           ),
         );
       });
@@ -105,7 +121,7 @@ class Products with ChangeNotifier {
 
   Future<String> addProduct(Product product) async {
     final url = Uri.parse(
-      'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products.json',
+      'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products.json?auth=$authToken',
     );
     try {
       final response = await http.post(
@@ -116,7 +132,6 @@ class Products with ChangeNotifier {
             'description': product.description,
             'imageURL': product.imageURL,
             'price': product.price,
-            'isFavorite': product.isFavorite,
           },
         ),
       );
@@ -145,7 +160,7 @@ class Products with ChangeNotifier {
     final int productIndex = _items.indexWhere((product) => product.id == id);
     if (productIndex >= 0) {
       final url = Uri.parse(
-        'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json',
+        'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json?auth=$authToken',
       );
       try {
         await http.patch(url,
@@ -168,7 +183,7 @@ class Products with ChangeNotifier {
 
   Future<void> deleteProduct(String id) async {
     final url = Uri.parse(
-      'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json',
+      'https://flutter-pason-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json?auth=$authToken',
     );
     final int existingProductIndex =
         _items.indexWhere((product) => product.id == id);
