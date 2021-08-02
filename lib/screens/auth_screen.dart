@@ -44,7 +44,7 @@ class AuthScreen extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 20.0),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 90.0),
+                          vertical: 8.0, horizontal: 63.0),
                       // transform: Matrix4.rotationZ(-8 * pi / 180)
                       // ..translate(-10.0),
                       // ..translate(-10.0),
@@ -67,7 +67,7 @@ class AuthScreen extends StatelessWidget {
                         ],
                       ),
                       child: Text(
-                        'PasOn',
+                        'ArmaTab',
                         style: Theme.of(context).textTheme.headline6.copyWith(
                               fontSize: 45,
                               fontWeight: FontWeight.bold,
@@ -247,7 +247,7 @@ class _AuthCardState extends State<AuthCard> {
                     validator: _authMode == AuthMode.Signup
                         ? (value) {
                             if (value != _passwordController.text) {
-                              return 'Passwords do not match!';
+                              return 'Passwords did not match';
                             }
                             return null;
                           }

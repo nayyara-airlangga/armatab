@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<Auth>(
         builder: (context, authData, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Arma Tabernam',
+          title: 'ArmaTab',
           theme: ThemeData(
             primarySwatch: Colors.deepPurple,
             accentColor: Colors.lightBlue,
