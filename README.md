@@ -14,15 +14,17 @@ An Arma Tabernam. Hence, ArmaTab. This is merely a small project to further fami
 
 It's basically like a normal shop app but for weapons only (for now). The user logs in/signs up and they will then have an account. Once they're authenticated, they will be forwarded to the main page of the app.
 
-### App features
+### Shopping and Adding Products
 
-In the main page of the app, they can navigate and manage multiple things such as ordering items, adding they're own products, and more. Further updates may provide more features.
+In the main page of the app, users can navigate through multiple pages and manage things such as ordering products, adding they're own products, editing their products, and more. 
 
-### Auto Login
+There are other features inside this app besides the main functionality of a shop, such as:
+
+#### Auto Login
 
 If the user is already logged in, for a certain amount of time they don't need to login unless they logged out manually. This makes sure the user don't have to log in every single time they open the app.
 
-### Auto Logout
+#### Auto Logout
 
 _This is slightly technical._
 
@@ -65,8 +67,8 @@ I used several packages provided by the `Flutter` community which are:
 - shared_preferences: ^2.0.6
 ```
 
-All of these packages can be found in the [`pub.dev`](https://pub.dev/) site which provides packages for `Dart` and `Flutter` for us to use which are provided by the `Dart` and `Flutter` community.
+All of these packages can be found in the [pub.dev](https://pub.dev/) site which provides packages for `Dart` and `Flutter` for us to use which are provided by the `Dart` and `Flutter` community.
 
 ## Running
 
-To run this app simply run the `main.dart` file attached inside of the `lib` folder.
+To run this app, simply run the `main.dart` file attached inside of the `lib` folder.
