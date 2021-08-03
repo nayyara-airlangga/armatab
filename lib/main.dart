@@ -63,6 +63,7 @@ class MyApp extends StatelessWidget {
           home: authData.isAuth
               ? ProductsOverviewScreen()
               : FutureBuilder(
+                  initialData: true,
                   future: authData.tryAutoLogin(),
                   builder: (context, authResultSnapshot) =>
                       authResultSnapshot.connectionState ==
