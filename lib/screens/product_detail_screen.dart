@@ -24,99 +24,110 @@ class ProductDetailScreen extends StatelessWidget {
     final formatCurrency = new NumberFormat.simpleCurrency(locale: 'en_US');
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Details'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Material(
-              borderRadius: BorderRadius.circular(0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(0),
-                child: Container(
-                  height: 300,
-                  width: double.infinity,
-                  child: Image.network(
-                    loadedProduct.imageURL,
-                    fit: BoxFit.cover,
-                  ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            pinned: true,
+            title: Text(
+              'Details',
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+            expandedHeight: 350,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Hero(
+                tag: loadedProduct.id,
+                child: Image.network(
+                  loadedProduct.imageURL,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            Divider(
-              color: Colors.grey[400],
-              height: 0,
-              thickness: 2,
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    loadedProduct.name,
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 28),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Divider(
+                  color: Colors.grey[200],
+                  thickness: 2,
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        loadedProduct.name,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 28),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    'Price:',
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 20),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'Price:',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Text(
-                    '${formatCurrency.format(loadedProduct.price)}',
-                    style:
-                        Theme.of(context).primaryTextTheme.headline6.copyWith(
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        '${formatCurrency.format(loadedProduct.price)}',
+                        style: Theme.of(context)
+                            .primaryTextTheme
+                            .headline6
+                            .copyWith(
                               color: Colors.black,
                               fontSize: 20,
                             ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                children: [
-                  Text(
-                    'Description:',
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 20),
+                ),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Description:',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    loadedProduct.description,
+                    softWrap: true,
+                    style:
+                        Theme.of(context).primaryTextTheme.headline6.copyWith(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                  ),
+                ),
+              ],
             ),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                loadedProduct.description,
-                softWrap: true,
-                style: Theme.of(context).primaryTextTheme.headline6.copyWith(
-                      color: Colors.black,
-                      fontSize: 18,
-                    ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
