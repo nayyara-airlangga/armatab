@@ -71,4 +71,4 @@ All of these packages can be found in the [pub.dev](https://pub.dev/) site which
 
 ## Running
 
-To run this app, simply run the `main.dart` file attached inside of the `lib` folder.
+To run this app from your IDE, simply run the `main.dart` file attached inside of the `lib` folder. If that doesn't work, create a new `Flutter` project and then replacing the contents of the `lib` folder with the lib folder above, then add the packages and assets in this repository. Then, run the `main.dart` file. Or just install it to your phone/emulator.
