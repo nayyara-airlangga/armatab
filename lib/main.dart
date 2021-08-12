@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 import 'providers/auth.dart';
 import 'providers/products.dart';
@@ -16,6 +17,9 @@ import 'screens/splash_screen.dart';
 import 'helpers/special_route.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(MyApp());
 }
 

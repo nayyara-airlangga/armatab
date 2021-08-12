@@ -60,6 +60,7 @@ class UserProductsScreen extends StatelessWidget {
                 ],
               )
             : RefreshIndicator(
+                backgroundColor: Theme.of(context).primaryColor,
                 onRefresh: () => _refreshProducts(context),
                 child: Consumer<Products>(
                   builder: (context, productsData, _) => Padding(
