@@ -26,14 +26,14 @@ class _OrderItemState extends State<OrderItem> {
     return AnimatedContainer(
       curve: Curves.easeIn,
       duration: Duration(milliseconds: 300),
-      height: _isExpanded
-          ? min(
-              widget.order.products.length == 0
-                  ? 0
-                  : widget.order.products.length * 20.0 + 120,
-              205,
-            )
-          : 92,
+      // height: _isExpanded
+      //     ? min(
+      //         widget.order.products.length == 0
+      //             ? 0
+      //             : widget.order.products.length * 20.0 + 120,
+      //         205,
+      //       )
+      //     : 92,
       child: Card(
         color: Theme.of(context).primaryColor,
         margin: const EdgeInsets.all(10),
@@ -78,7 +78,7 @@ class _OrderItemState extends State<OrderItem> {
                   ? min(
                       widget.order.products.length == 0
                           ? 0
-                          : widget.order.products.length * 20.0 + 20,
+                          : widget.order.products.length * 25.0 + 20,
                       170,
                     )
                   : 0,
