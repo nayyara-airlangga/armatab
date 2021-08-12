@@ -20,7 +20,12 @@ class UserProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     return ListTile(
-      title: Text(name),
+      title: Text(
+        name,
+        style: TextStyle(
+          color: Theme.of(context).textTheme.headline6.color,
+        ),
+      ),
       leading: CircleAvatar(
         backgroundColor: Colors.white,
         backgroundImage: NetworkImage(imageURL),
@@ -34,7 +39,14 @@ class UserProductItem extends StatelessWidget {
                 Navigator.of(context)
                     .pushNamed(EditProductScreen.routeName, arguments: id);
               },
-              icon: Icon(Icons.edit),
+              icon: Icon(
+                Icons.edit,
+                color: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    .color
+                    .withOpacity(0.5),
+              ),
               color: Theme.of(context).primaryColor,
             ),
             IconButton(
@@ -42,9 +54,13 @@ class UserProductItem extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
+                    backgroundColor: Theme.of(context).primaryColor,
                     title: Text('Remove $name?'),
                     content: Text(
                       'Would you like to remove this item from your products?',
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.headline6.color,
+                      ),
                     ),
                     actions: <Widget>[
                       ElevatedButton(

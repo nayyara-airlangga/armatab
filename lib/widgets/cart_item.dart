@@ -34,8 +34,14 @@ class CartItem extends StatelessWidget {
         return showDialog(
           context: context,
           builder: (context) => AlertDialog(
+            backgroundColor: Theme.of(context).primaryColor,
             title: Text('Remove ${cartItem.name}?'),
-            content: Text('Would you like to remove this item from the cart?'),
+            content: Text(
+              'Would you like to remove this item from the cart?',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.headline6.color,
+              ),
+            ),
             actions: <Widget>[
               ElevatedButton(
                 child: Text('Yes'),
@@ -67,54 +73,86 @@ class CartItem extends StatelessWidget {
       ),
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-        child: Padding(
-          padding: const EdgeInsets.all(0),
-          child: ListTile(
-            leading: CircleAvatar(
-              radius: 25,
-              child: Padding(
-                padding: const EdgeInsets.all(4),
-                child: FittedBox(
-                  child: Text('${formatCurrency.format(price)}'),
+        child: ListTile(
+          tileColor: Theme.of(context).primaryColor,
+          leading: CircleAvatar(
+            backgroundColor: Theme.of(context).accentColor.withOpacity(0.2),
+            radius: 25,
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: FittedBox(
+                child: Text(
+                  '${formatCurrency.format(price)}',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.headline6.color,
+                  ),
                 ),
               ),
             ),
-            title: Text(name),
-            subtitle: Text('Total: ${formatCurrency.format(price * quantity)}'),
-            trailing: Container(
-              width: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      cartData.removeSingleItem(
-                        cartItem.id,
-                      );
-                    },
-                    child: Icon(Icons.remove),
+          ),
+          title: Text(
+            name,
+            style: TextStyle(
+              color: Theme.of(context).textTheme.headline6.color,
+            ),
+          ),
+          subtitle: Text(
+            'Total: ${formatCurrency.format(price * quantity)}',
+            style: TextStyle(
+              color:
+                  Theme.of(context).textTheme.headline6.color.withOpacity(0.6),
+            ),
+          ),
+          trailing: Container(
+            width: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    cartData.removeSingleItem(
+                      cartItem.id,
+                    );
+                  },
+                  child: Icon(
+                    Icons.remove,
+                    color: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .color
+                        .withOpacity(0.6),
                   ),
-                  Container(
-                    width: 25,
-                    child: FittedBox(
-                      child: Text(
-                        '${quantity}x',
-                        style: TextStyle(fontSize: 18),
+                ),
+                Container(
+                  width: 25,
+                  child: FittedBox(
+                    child: Text(
+                      '${quantity}x',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Theme.of(context).textTheme.headline6.color,
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      cartData.addItem(
-                        productID: cartItem.id,
-                        name: cartItem.name,
-                        price: cartItem.price,
-                      );
-                    },
-                    child: Icon(Icons.add),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    cartData.addItem(
+                      productID: cartItem.id,
+                      name: cartItem.name,
+                      price: cartItem.price,
+                    );
+                  },
+                  child: Icon(
+                    Icons.add,
+                    color: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .color
+                        .withOpacity(0.6),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

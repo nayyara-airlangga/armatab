@@ -23,8 +23,8 @@ class AuthScreen extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  themeData.primaryColor.withOpacity(1),
-                  themeData.accentColor.withOpacity(0.7),
+                  themeData.primaryColor,
+                  themeData.scaffoldBackgroundColor,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -52,8 +52,8 @@ class AuthScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         gradient: LinearGradient(
                           colors: [
-                            themeData.primaryColor.withOpacity(1),
-                            themeData.accentColor.withOpacity(0.7),
+                            themeData.scaffoldBackgroundColor,
+                            themeData.scaffoldBackgroundColor,
                           ],
                           begin: Alignment.centerRight,
                           end: Alignment.centerLeft,
@@ -147,8 +147,14 @@ class _AuthCardState extends State<AuthCard>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text('An Error Occured'),
-        content: Text(message),
+        content: Text(
+          message,
+          style: TextStyle(
+            color: Theme.of(context).textTheme.headline6.color,
+          ),
+        ),
         actions: <Widget>[
           TextButton(
             onPressed: () {
@@ -224,6 +230,7 @@ class _AuthCardState extends State<AuthCard>
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
+      color: Theme.of(context).scaffoldBackgroundColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -243,7 +250,37 @@ class _AuthCardState extends State<AuthCard>
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Email'),
+                  style: TextStyle(
+                    color: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .color
+                        .withOpacity(0.6),
+                  ),
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .color
+                            .withOpacity(0.7),
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .color
+                            .withOpacity(0.3),
+                      ),
+                    ),
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).textTheme.headline6.color,
+                    ),
+                  ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value.isEmpty || !value.contains('@')) {
@@ -256,9 +293,44 @@ class _AuthCardState extends State<AuthCard>
                   },
                 ),
                 TextFormField(
+                  style: TextStyle(
+                    color: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .color
+                        .withOpacity(0.6),
+                  ),
                   decoration: InputDecoration(
                     labelText: 'Password',
                     hintText: 'Password must be at least 6 characters long',
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .color
+                            .withOpacity(0.7),
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .color
+                            .withOpacity(0.3),
+                      ),
+                    ),
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).textTheme.headline6.color,
+                    ),
+                    hintStyle: TextStyle(
+                      color: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .color
+                          .withOpacity(0.5),
+                    ),
                   ),
                   obscureText: true,
                   controller: _passwordController,
@@ -283,9 +355,38 @@ class _AuthCardState extends State<AuthCard>
                     child: SlideTransition(
                       position: _slideAnimation,
                       child: TextFormField(
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .color
+                              .withOpacity(0.6),
+                        ),
                         enabled: _authMode == AuthMode.Signup,
-                        decoration:
-                            InputDecoration(labelText: 'Confirm Password'),
+                        decoration: InputDecoration(
+                          labelText: 'Confirm Password',
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .color
+                                  .withOpacity(0.7),
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .color
+                                  .withOpacity(0.3),
+                            ),
+                          ),
+                          labelStyle: TextStyle(
+                            color: Theme.of(context).textTheme.headline6.color,
+                          ),
+                        ),
                         obscureText: true,
                         validator: _authMode == AuthMode.Signup
                             ? (value) {
@@ -312,7 +413,7 @@ class _AuthCardState extends State<AuthCard>
                   child: Text(
                     '${_authMode == AuthMode.Login ? 'Don\'t have an account?' : 'Already have an account?'} ',
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).textTheme.headline6.color,
                     ),
                   ),
                   onPressed: _switchAuthMode,

@@ -24,6 +24,7 @@ class CartScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           Card(
+            color: Theme.of(context).primaryColor,
             margin: const EdgeInsets.all(15),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 10, 7, 10),
@@ -34,6 +35,7 @@ class CartScreen extends StatelessWidget {
                     'Total',
                     style: TextStyle(
                       fontSize: 20,
+                      color: Theme.of(context).textTheme.headline6.color,
                     ),
                   ),
                   Spacer(),
@@ -45,7 +47,7 @@ class CartScreen extends StatelessWidget {
                             Theme.of(context).primaryTextTheme.headline6.color,
                       ),
                     ),
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   OrderButton(cartData: cartData),
                 ],
@@ -96,7 +98,8 @@ class _OrderButtonState extends State<OrderButton> {
           ? CircularProgressIndicator()
           : Text(
               'Order Now',
-              style: TextStyle(color: Theme.of(context).primaryColor),
+              style:
+                  TextStyle(color: Theme.of(context).textTheme.headline6.color),
             ),
       onPressed: (widget.cartData.totalPrice <= 0 || _isLoading)
           ? null
@@ -105,9 +108,15 @@ class _OrderButtonState extends State<OrderButton> {
                 showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
+                          backgroundColor: Theme.of(context).primaryColor,
                           title: Text('Finalize order?'),
-                          content:
-                              Text('Would you like to finalize this order?'),
+                          content: Text(
+                            'Would you like to finalize this order?',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.headline6.color,
+                            ),
+                          ),
                           actions: <Widget>[
                             ElevatedButton(
                               child: Text('Yes'),

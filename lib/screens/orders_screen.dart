@@ -49,7 +49,12 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   children: [
                     CircularProgressIndicator(),
                     const SizedBox(height: 10),
-                    Text('Fetching your orders...'),
+                    Text(
+                      'Fetching your orders...',
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.headline6.color,
+                      ),
+                    ),
                   ],
                 ),
               ],

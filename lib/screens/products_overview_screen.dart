@@ -94,6 +94,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             ),
           ),
           PopupMenuButton(
+            color: Theme.of(context).scaffoldBackgroundColor,
             onSelected: (FilterOptions selectedValue) {
               setState(() {
                 if (selectedValue == FilterOptions.Favorites) {
@@ -106,11 +107,21 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
               PopupMenuItem(
-                child: Text('Favorites only'),
+                child: Text(
+                  'Favorites only',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.headline6.color,
+                  ),
+                ),
                 value: FilterOptions.Favorites,
               ),
               PopupMenuItem(
-                child: Text('Show all'),
+                child: Text(
+                  'Show all',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.headline6.color,
+                  ),
+                ),
                 value: FilterOptions.All,
               ),
             ],
@@ -130,13 +141,19 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   children: <Widget>[
                     CircularProgressIndicator(),
                     const SizedBox(height: 10),
-                    Text('Fetching products...'),
+                    Text(
+                      'Fetching products...',
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.headline6.color,
+                      ),
+                    ),
                   ],
                 ),
               ],
             );
           } else {
             return RefreshIndicator(
+              backgroundColor: Theme.of(context).primaryColor,
               onRefresh: _obtainProductsFuture,
               child: Consumer<Products>(
                 builder: (context, productsData, _) => productsData

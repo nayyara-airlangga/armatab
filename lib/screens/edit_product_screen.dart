@@ -97,10 +97,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
       Future<bool> confirmEdit = showDialog(
         context: context,
         builder: (context) => AlertDialog(
+          backgroundColor: Theme.of(context).primaryColor,
           title: Text(
             'Update this product?',
           ),
-          content: Text('Would you like to update this item in your products?'),
+          content: Text(
+            'Would you like to update this item in your products?',
+            style: TextStyle(
+              color: Theme.of(context).textTheme.headline6.color,
+            ),
+          ),
           actions: <Widget>[
             ElevatedButton(
               child: Text('Yes'),
@@ -160,8 +166,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
             final bool isOkay = await showDialog(
               context: context,
               builder: (context) => AlertDialog(
+                backgroundColor: Theme.of(context).primaryColor,
                 title: Text('An error occured'),
-                content: Text('Something went wrong'),
+                content: Text(
+                  'Something went wrong',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.headline6.color,
+                  ),
+                ),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -184,10 +196,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
       Future<bool> confirmAdd = showDialog(
         context: context,
         builder: (context) => AlertDialog(
+          backgroundColor: Theme.of(context).primaryColor,
           title: Text(
             'Add ${_editedProduct.name}?',
           ),
-          content: Text('Would you like to add this item to your products?'),
+          content: Text(
+            'Would you like to add this item to your products?',
+            style: TextStyle(
+              color: Theme.of(context).textTheme.headline6.color,
+            ),
+          ),
           actions: <Widget>[
             ElevatedButton(
               child: Text('Yes'),
@@ -246,8 +264,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
             final bool isOkay = await showDialog(
               context: context,
               builder: (context) => AlertDialog(
+                backgroundColor: Theme.of(context).primaryColor,
                 title: Text('An error occured'),
-                content: Text('Something went wrong'),
+                content: Text(
+                  'Something went wrong',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.headline6.color,
+                  ),
+                ),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -284,7 +308,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   children: [
                     CircularProgressIndicator(),
                     const SizedBox(height: 10),
-                    Text('Updating your products...'),
+                    Text(
+                      'Updating your products...',
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.headline6.color,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -299,9 +328,45 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       TextFormField(
                         initialValue: _initValues['name'],
                         decoration: InputDecoration(
-                            labelText: 'Name',
-                            hintText: 'Ex: Baseball Bat, Shoes, Jacket'),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .color
+                                  .withOpacity(0.7),
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .color
+                                  .withOpacity(0.3),
+                            ),
+                          ),
+                          labelText: 'Name',
+                          hintText: 'Ex: Baseball Bat, Shoes, Jacket',
+                          labelStyle: TextStyle(
+                            color: Theme.of(context).textTheme.headline6.color,
+                          ),
+                          hintStyle: TextStyle(
+                            color: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .color
+                                .withOpacity(0.5),
+                          ),
+                        ),
                         textInputAction: TextInputAction.next,
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .color
+                              .withOpacity(0.6),
+                        ),
                         onSaved: (value) {
                           _editedProduct = Product(
                             name: value,
@@ -323,6 +388,41 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         decoration: InputDecoration(
                           labelText: 'Price (USD)',
                           hintText: 'Ex: 99.99',
+                          labelStyle: TextStyle(
+                            color: Theme.of(context).textTheme.headline6.color,
+                          ),
+                          hintStyle: TextStyle(
+                            color: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .color
+                                .withOpacity(0.5),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .color
+                                  .withOpacity(0.7),
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .color
+                                  .withOpacity(0.3),
+                            ),
+                          ),
+                        ),
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .color
+                              .withOpacity(0.6),
                         ),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
@@ -352,6 +452,41 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           labelText: 'Description',
                           hintText:
                               'Ex: A hand crafted knife, durable and can cut through flesh effortlessly',
+                          labelStyle: TextStyle(
+                            color: Theme.of(context).textTheme.headline6.color,
+                          ),
+                          hintStyle: TextStyle(
+                            color: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .color
+                                .withOpacity(0.5),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .color
+                                  .withOpacity(0.7),
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .color
+                                  .withOpacity(0.3),
+                            ),
+                          ),
+                        ),
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .color
+                              .withOpacity(0.6),
                         ),
                         maxLines: 4,
                         keyboardType: TextInputType.multiline,
@@ -387,9 +522,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             child: _imageURLController.text.isEmpty
                                 ? Center(
                                     child: Text(
-                                    'Enter an image URL',
-                                    textAlign: TextAlign.center,
-                                  ))
+                                      'Enter an image URL',
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .headline6
+                                            .color,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )
                                 : FittedBox(
                                     child: Image.network(
                                       _imageURLController.text,
@@ -398,7 +540,31 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                   ),
                           ),
                           TextFormField(
-                            decoration: InputDecoration(labelText: 'Image URL'),
+                            decoration: InputDecoration(
+                              labelText: 'Image URL',
+                              labelStyle: TextStyle(
+                                color:
+                                    Theme.of(context).textTheme.headline6.color,
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .color
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .color
+                                      .withOpacity(0.3),
+                                ),
+                              ),
+                            ),
                             keyboardType: TextInputType.url,
                             textInputAction: TextInputAction.done,
                             controller: _imageURLController,
@@ -406,6 +572,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               setState(() {});
                               _saveForm();
                             },
+                            style: TextStyle(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .color
+                                  .withOpacity(0.6),
+                            ),
                             onSaved: (value) {
                               _editedProduct = Product(
                                 name: _editedProduct.name,

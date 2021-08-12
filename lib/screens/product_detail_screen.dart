@@ -48,10 +48,6 @@ class ProductDetailScreen extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Divider(
-                  color: Colors.grey[200],
-                  thickness: 2,
-                ),
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -59,9 +55,9 @@ class ProductDetailScreen extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         loadedProduct.name,
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 28),
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                              fontSize: 28,
+                            ),
                       ),
                     ],
                   ),
@@ -73,9 +69,9 @@ class ProductDetailScreen extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         'Price:',
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 20),
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                              fontSize: 20,
+                            ),
                       ),
                     ],
                   ),
@@ -86,11 +82,7 @@ class ProductDetailScreen extends StatelessWidget {
                     children: [
                       Text(
                         '${formatCurrency.format(loadedProduct.price)}',
-                        style: Theme.of(context)
-                            .primaryTextTheme
-                            .headline6
-                            .copyWith(
-                              color: Colors.black,
+                        style: Theme.of(context).textTheme.headline6.copyWith(
                               fontSize: 20,
                             ),
                       ),
@@ -104,9 +96,9 @@ class ProductDetailScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Description:',
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 20),
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                              fontSize: 20,
+                            ),
                       ),
                     ],
                   ),
@@ -117,11 +109,9 @@ class ProductDetailScreen extends StatelessWidget {
                   child: Text(
                     loadedProduct.description,
                     softWrap: true,
-                    style:
-                        Theme.of(context).primaryTextTheme.headline6.copyWith(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
+                    style: Theme.of(context).textTheme.headline6.copyWith(
+                          fontSize: 18,
+                        ),
                   ),
                 ),
               ],

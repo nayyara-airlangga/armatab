@@ -57,9 +57,13 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'ArmaTab',
           theme: ThemeData(
-            primarySwatch: Colors.deepPurple,
-            accentColor: Colors.lightBlue,
+            scaffoldBackgroundColor: Colors.blueGrey[800],
+            primaryColor: Colors.blueGrey[900],
+            accentColor: Colors.lightBlue[800],
             fontFamily: 'Lato',
+            textTheme: TextTheme(
+              headline6: TextStyle(color: Colors.white),
+            ),
             pageTransitionsTheme: PageTransitionsTheme(
               builders: {
                 TargetPlatform.android: SpecialPageTransitionBuilder(),
