@@ -236,11 +236,11 @@ class _AuthCardState extends State<AuthCard>
       ),
       elevation: 8.0,
       child: AnimatedContainer(
-        height: _authMode == AuthMode.Signup ? 330 : 280,
+        height: _authMode == AuthMode.Signup ? 350 : 280,
         duration: Duration(milliseconds: 300),
         curve: Curves.easeInSine,
         constraints: BoxConstraints(
-          minHeight: _authMode == AuthMode.Signup ? 330 : 280,
+          minHeight: _authMode == AuthMode.Signup ? 350 : 280,
         ),
         width: deviceSize.width * 0.75,
         padding: EdgeInsets.all(16.0),
@@ -347,8 +347,8 @@ class _AuthCardState extends State<AuthCard>
                 AnimatedContainer(
                   duration: Duration(milliseconds: 300),
                   constraints: BoxConstraints(
-                    minHeight: _authMode == AuthMode.Signup ? 60 : 0,
-                    maxHeight: _authMode == AuthMode.Signup ? 60 : 0,
+                    minHeight: _authMode == AuthMode.Signup ? 90 : 0,
+                    maxHeight: _authMode == AuthMode.Signup ? 90 : 0,
                   ),
                   child: FadeTransition(
                     opacity: _opacityAnimation,
@@ -400,7 +400,7 @@ class _AuthCardState extends State<AuthCard>
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: _authMode == AuthMode.Signup ? 0 : 30),
                 if (_isLoading)
                   CircularProgressIndicator()
                 else
