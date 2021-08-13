@@ -6,6 +6,7 @@ import '../widgets/badge.dart';
 import '../providers/cart.dart';
 import '../providers/products.dart';
 import 'cart_screen.dart';
+import 'screens.dart';
 import '../widgets/app_drawer.dart';
 
 enum FilterOptions {
@@ -18,6 +19,8 @@ class ProductsOverviewScreen extends StatefulWidget {
     Key key,
   }) : super(key: key);
 
+  static const String routeName = '/';
+
   @override
   _ProductsOverviewScreenState createState() => _ProductsOverviewScreenState();
 }
@@ -26,6 +29,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   bool _showFavoritesOnly = false;
   // bool _isInit = true;
   // bool _isLoading = false;
+
+  int index = 0;
 
   Future _productsFuture;
 
@@ -179,6 +184,38 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             );
           }
         },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        unselectedItemColor:
+            Theme.of(context).textTheme.headline6.color.withOpacity(0.6),
+        selectedItemColor: Theme.of(context).textTheme.headline6.color,
+        onTap: (value) {
+          setState(() {
+            index = value;
+          });
+          if (index == 0)
+            Navigator.of(context).pushReplacementNamed(screens[0]);
+          if (index == 1)
+            Navigator.of(context).pushReplacementNamed(screens[1]);
+          if (index == 2)
+            Navigator.of(context).pushReplacementNamed(screens[2]);
+        },
+        currentIndex: index,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shop),
+            label: 'Shop',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.payment),
+            label: 'Orders',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.edit),
+            label: 'Products',
+          ),
+        ],
       ),
     );
   }

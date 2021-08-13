@@ -5,19 +5,27 @@ import '../providers/products.dart';
 import '../widgets/user_product_item.dart';
 import '../widgets/app_drawer.dart';
 import 'edit_product_screen.dart';
+import 'screens.dart';
 
-class UserProductsScreen extends StatelessWidget {
+class UserProductsScreen extends StatefulWidget {
   static const String routeName = '/user-products';
 
+  const UserProductsScreen({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _UserProductsScreenState createState() => _UserProductsScreenState();
+}
+
+class _UserProductsScreenState extends State<UserProductsScreen> {
   Future<void> _refreshProducts(BuildContext context) async {
     await Provider.of<Products>(context, listen: false).fetchAndSetProducts(
       filterByUser: true,
     );
   }
 
-  const UserProductsScreen({
-    Key key,
-  }) : super(key: key);
+  int index = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +92,38 @@ class UserProductsScreen extends StatelessWidget {
                   ),
                 ),
               ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        unselectedItemColor:
+            Theme.of(context).textTheme.headline6.color.withOpacity(0.6),
+        selectedItemColor: Theme.of(context).textTheme.headline6.color,
+        onTap: (value) {
+          setState(() {
+            index = value;
+          });
+          if (index == 0)
+            Navigator.of(context).pushReplacementNamed(screens[0]);
+          if (index == 1)
+            Navigator.of(context).pushReplacementNamed(screens[1]);
+          if (index == 2)
+            Navigator.of(context).pushReplacementNamed(screens[2]);
+        },
+        currentIndex: index,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shop),
+            label: 'Shop',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.payment),
+            label: 'Orders',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.edit),
+            label: 'Products',
+          ),
+        ],
       ),
     );
   }
